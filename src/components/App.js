@@ -10,8 +10,18 @@ function normPos(width, pos) {
   return newPos;
 }
 
+function itIsWaldo(pos) {
+  const waldoPos = [1850, 750];
+  if (
+    Math.abs(pos[0] - waldoPos[0]) < 40 &&
+    Math.abs(pos[1] - waldoPos[1]) < 40
+  )
+    return true;
+  else return false;
+}
+
 function App() {
-  const [position, setPosition] = useState([0, 0]);
+  const [foundWaldo, setFoundWaldo] = useState(false);
   const [cursorPosition, setCursorPosition] = useState([0, 0]);
   const [popUpVisible, setPopUpVisible] = useState(false);
 
@@ -24,7 +34,7 @@ function App() {
       // getBoundingClientRect relative to viewport => need to offset scroll
       e.pageY - (imgProps.top + window.scrollY),
     ]);
-    setPosition(pos.map((x) => Math.round(x)));
+    setFoundWaldo(itIsWaldo(pos));
     setCursorPosition([e.clientX, e.clientY]);
   }
 
@@ -36,7 +46,9 @@ function App() {
         onClick={handleClick}
         src={waldo}
       ></img>
-      {popUpVisible && <PopUp pos={position} cursPos={cursorPosition} />}
+      {popUpVisible && (
+        <PopUp waldoFound={foundWaldo} cursPos={cursorPosition} />
+      )}
     </>
   );
 }

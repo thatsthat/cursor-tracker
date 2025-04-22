@@ -1,9 +1,9 @@
 import styles from "../styles/PopUp.module.css";
 import { useRef, useEffect, useState } from "react";
 
-function PopUp({ pos, cursPos }) {
+function PopUp({ waldoFound, cursPos }) {
   const myRef = useRef(null);
-  const posi = "X: " + pos[0] + " - Y: " + pos[1];
+  const text = waldoFound ? "Waldo Found!" : "Keep trying";
   const [finalPos, setFinalPos] = useState([0, 0]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function PopUp({ pos, cursPos }) {
       className={styles.main}
       style={{ top: `${finalPos[1]}px`, left: `${finalPos[0]}px` }}
     >
-      {posi}
+      {text}
     </div>
   );
 }
