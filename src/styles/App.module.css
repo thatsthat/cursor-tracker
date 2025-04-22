@@ -1,4 +1,8 @@
-.rootDiv {
-  height: 100%;
+.rootElem {
+  width: 100%;
   background-color: grey;
+}
+
+img {
+  margin-top: 500px;
 }
