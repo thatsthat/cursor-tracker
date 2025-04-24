@@ -1,41 +1,38 @@
 import styles from "../styles/App.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PopUp from "./PopUp";
 import waldo from "../assets/waldoBackground.jpg";
 
 function normPos(width, pos) {
-  const refWidth = 3000;
+  const refWidth = 3000; // This constant depends on the picture's original size
   const ratio = refWidth / width;
   const newPos = pos.map((x) => x * ratio);
   return newPos;
 }
 
-function itIsWaldo(pos) {
-  const waldoPos = [1850, 750];
-  if (
-    Math.abs(pos[0] - waldoPos[0]) < 40 &&
-    Math.abs(pos[1] - waldoPos[1]) < 40
-  )
-    return true;
-  else return false;
-}
-
 function App() {
-  const [foundWaldo, setFoundWaldo] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState([0, 0]);
+  const [clickedPosition, setClickedPosition] = useState(false);
+  const [popUpPosition, setPopUpPosition] = useState([0, 0]);
   const [popUpVisible, setPopUpVisible] = useState(false);
+  const [waldoFound, setWaldoFound] = useState(false);
+  const [wizardFound, setWizardFound] = useState(false);
+  const [odlawFound, setOdlawFound] = useState(false);
+  const imgRef = useRef(null);
 
   function handleClick(e) {
+    if (popUpVisible) {
+      setPopUpVisible(false);
+      return;
+    }
     setPopUpVisible(true);
-    const image = document.getElementById("waldo");
-    const imgProps = image.getBoundingClientRect();
+    const imgProps = imgRef.current.getBoundingClientRect();
     const pos = normPos(imgProps.width, [
       e.pageX - imgProps.left,
       // getBoundingClientRect relative to viewport => need to offset scroll
       e.pageY - (imgProps.top + window.scrollY),
     ]);
-    setFoundWaldo(itIsWaldo(pos));
-    setCursorPosition([e.clientX, e.clientY]);
+    setClickedPosition(pos);
+    setPopUpPosition([e.clientX, e.clientY]);
   }
 
   return (
@@ -45,9 +42,19 @@ function App() {
         className={styles.rootElem}
         onClick={handleClick}
         src={waldo}
+        ref={imgRef}
       ></img>
       {popUpVisible && (
-        <PopUp waldoFound={foundWaldo} cursPos={cursorPosition} />
+        <PopUp
+          clickedPos={clickedPosition}
+          popUpPos={popUpPosition}
+          setWaldo={setWaldoFound}
+          setWizard={setWizardFound}
+          setOdlaw={setOdlawFound}
+          waldo={waldoFound}
+          wizard={wizardFoundG}
+          odlaw={odlawFound}
+        />
       )}
     </>
   );
