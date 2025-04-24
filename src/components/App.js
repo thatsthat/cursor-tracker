@@ -1,6 +1,7 @@
 import styles from "../styles/App.module.css";
 import { useState, useRef } from "react";
 import PopUp from "./PopUp";
+import SideBar from "./SideBar";
 import waldo from "../assets/waldoBackground.jpg";
 
 function normPos(width, pos) {
@@ -36,14 +37,16 @@ function App() {
   }
 
   return (
-    <>
-      <img
-        id="waldo"
-        className={styles.rootElem}
-        onClick={handleClick}
-        src={waldo}
-        ref={imgRef}
-      ></img>
+    <div className={styles.main}>
+      <SideBar waldo={waldoFound} wizard={wizardFound} odlaw={odlawFound} />
+      <div className={styles.waldoBackground}>
+        <img
+          className={styles.waldoImg}
+          onClick={handleClick}
+          src={waldo}
+          ref={imgRef}
+        ></img>
+      </div>
       {popUpVisible && (
         <PopUp
           clickedPos={clickedPosition}
@@ -52,11 +55,11 @@ function App() {
           setWizard={setWizardFound}
           setOdlaw={setOdlawFound}
           waldo={waldoFound}
-          wizard={wizardFoundG}
+          wizard={wizardFound}
           odlaw={odlawFound}
         />
       )}
-    </>
+    </div>
   );
 }
 

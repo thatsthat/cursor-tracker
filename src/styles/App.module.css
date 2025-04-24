@@ -1,4 +1,18 @@
-.rootElem {
+.waldoBackground {
+  background-color: grey;
+  width: fit-content;
+  border-left: 2px solid black;
+}
+
+.waldoImg {
   width: 100%;
+  display: block;
+}
+
+.main {
+  display: flex;
+}
+
+body {
   background-color: grey;
 }

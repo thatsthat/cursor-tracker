@@ -1,0 +1,19 @@
+.main {
+  background-color: grey;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+
+p {
+  margin: 0;
+}
+
+.found > p {
+  color: green;
+}
+
+.found > img {
+  opacity: 50%;
+}
