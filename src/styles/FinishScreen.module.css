@@ -1,0 +1,65 @@
+.main {
+  border: 3px solid white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 4rem;
+  position: fixed;
+  z-index: 1100;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 3rem;
+  color: white;
+}
+
+input[type="file"] {
+  font-size: large;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.body {
+  display: flex;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 1rem;
+  font-size: large;
+}
+
+.title {
+  color: white;
+  font-size: x-large;
+}
+.close {
+  cursor: pointer;
+  text-decoration: none;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+.error {
+  color: red;
+  font-size: large;
+}

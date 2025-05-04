@@ -1,9 +1,11 @@
 import styles from "../styles/PopUp.module.css";
 import { useRef, useLayoutEffect, useState } from "react";
+import apiCall from "../utils/apiFunctions";
 
 function PopUp({
   clickedPos,
   popUpPos,
+  popUpVisible,
   setWaldo,
   setWizard,
   setOdlaw,
@@ -13,30 +15,6 @@ function PopUp({
 }) {
   const myRef = useRef(null);
   const [finalPos, setFinalPos] = useState([0, 0]);
-
-  function youFoundIt(p, name) {
-    const waldoPos = [1850, 750];
-    const wizardPos = [812, 700];
-    const odlawPos = [320, 705];
-    var charPos = [];
-    switch (name) {
-      case "Waldo":
-        charPos = waldoPos;
-        break;
-      case "Wizard":
-        charPos = wizardPos;
-        break;
-      case "Odlaw":
-        charPos = odlawPos;
-        break;
-      default:
-        console.log("Something is wrong");
-    }
-
-    if (Math.abs(p[0] - charPos[0]) < 40 && Math.abs(p[1] - charPos[1]) < 40)
-      return true;
-    else return false;
-  }
 
   function hideChar(name) {
     switch (name) {
@@ -61,8 +39,18 @@ function PopUp({
     setFinalPos([fpx, fpy]);
   }, [popUpPos]);
 
-  function handleClick(e) {
-    const charFound = youFoundIt(clickedPos, e.target.id);
+  async function handleClick(e) {
+    popUpVisible(false);
+    // Call to backend to check if character found.
+    const charFound = await apiCall(
+      "get",
+      "/" +
+        e.target.id +
+        "/" +
+        Math.floor(clickedPos[0]) +
+        "/" +
+        Math.floor(clickedPos[1])
+    );
     if (charFound) {
       console.log(e.target.id + " found!");
       hideChar(e.target.id);

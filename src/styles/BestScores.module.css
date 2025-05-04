@@ -1,0 +1,12 @@
+.main {
+  border: 3px solid white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 4rem;
+  position: fixed;
+  z-index: 1100;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 3rem;
+  color: white;
+}
