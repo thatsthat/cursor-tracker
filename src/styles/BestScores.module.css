@@ -1,12 +1,33 @@
 .main {
-  border: 3px solid white;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  gap: 4rem;
-  position: fixed;
-  z-index: 1100;
-  background-color: rgba(0, 0, 0, 1);
-  padding: 3rem;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.scoresTable {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.header {
+  font-size: xx-large;
+  align-self: left;
+  margin-bottom: 2rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
   color: white;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  font-size: large;
 }

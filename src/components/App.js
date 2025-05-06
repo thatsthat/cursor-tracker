@@ -2,6 +2,7 @@ import styles from "../styles/App.module.css";
 import { useState, useRef, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import GameScreen from "./GameScreen";
+import BestScores from "./BestScores";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<GameScreen />} />
+          <Route path="/best" element={<BestScores />} />
         </Routes>
       </BrowserRouter>
     </div>

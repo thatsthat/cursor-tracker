@@ -1,20 +1,45 @@
 import styles from "../styles/BestScores.module.css";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router";
+
 import apiCall from "../utils/apiFunctions";
 
-const scores = [
-  { name: "Player 1", time: 10 },
-  { name: "Player 2", time: 11 },
-  { name: "Player 3", time: 12 },
-  { name: "Player 4", time: 13 },
-  { name: "Player 5", time: 14 },
-  { name: "Player 6", time: 15 },
-  { name: "Player 6", time: 23 },
-  { name: "Player 7", time: 44 },
-];
-
 function BestScores() {
-  return <div className={styles.main}>hello world</div>;
+  const [scores, setScores] = useState([]);
+  const navigate = useNavigate();
+
+  const getScores = async () => {
+    const scores = await apiCall("get", "/");
+    setScores(scores);
+  };
+
+  useEffect(() => {
+    getScores();
+  }, []);
+
+  return (
+    <div className={styles.main}>
+      <Link to="/" className={styles.button}>
+        Play Again
+      </Link>
+      <div className={styles.header}>Best Scores:</div>
+      <div className={styles.scoresTable}>
+        <p>
+          <strong>Name:</strong>
+        </p>
+        <p>
+          <strong>Time:</strong>
+        </p>
+        {scores &&
+          scores.map((score, i) => (
+            <>
+              <p>{score.name}</p>
+              <p>{score.time} seconds</p>
+            </>
+          ))}
+      </div>
+    </div>
+  );
 }
 
 export default BestScores;

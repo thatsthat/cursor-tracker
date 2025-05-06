@@ -1,8 +1,21 @@
 import styles from "../styles/FinishScreen.module.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import apiCall from "../utils/apiFunctions";
+import { Link, useNavigate } from "react-router";
+
+const scoreData = [
+  { name: "Player 1", time: 10 },
+  { name: "Player 2", time: 12 },
+  { name: "Player 3", time: 14 },
+  { name: "Player 4", time: 22 },
+  { name: "Player 5", time: 35 },
+  { name: "Player 6", time: 394 },
+  { name: "Player 7", time: 1204 },
+  { name: "Player 8", time: 33 },
+];
 
 function FinishScreen({ time, intervId }) {
+  const navigate = useNavigate();
   const upload = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -16,7 +29,7 @@ function FinishScreen({ time, intervId }) {
         time: time,
       })
     );
-    console.log(resp);
+    navigate("/best", { replace: true });
   };
   clearInterval(intervId);
   return (
